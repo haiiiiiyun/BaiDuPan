@@ -10,7 +10,7 @@
 
 ### Usage
 ```bash
-git clone https://github.com/tengzhangchao/BaiDuPan
+git clone https://github.com/tengzhangchao/BaiDuPan.git
 ```
 #### baiduspider（Shell版）
 ```bash
