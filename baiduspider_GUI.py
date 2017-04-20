@@ -20,18 +20,14 @@ import re
 import urllib2
 import urllib
 import json
+import argparse
+from gooey import Gooey
 
+Cookie=""
+path="/"
 res_content=r'"app_id":"(\d*)".*"uk":(\d*).*"bdstoken":"(\w*)".*"shareid":(\d*)'  #正则，获取参数值
 res_title=r"<title>([^_]*)_.*</title>"  #正则，获取资源名称
-headers = {
-    'Host':"pan.baidu.com",
-    'Accept':'*/*',
-    'Accept-Language':'en-US,en;q=0.8',
-    'Cache-Control':'max-age=0',
-    'Referer':'https://pan.baidu.com/s/1kUOxT0V?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&',
-    'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36',
-    'Cookie':'BAIDUID=C1015A10A3FC569A66923EC2D12AA6EF:FG=1; BIDUPSID=C1015A10A3FC569A66923EC2D12AA6EF; PSTM=1491540382; PANWEB=1; bdshare_firstime=1492047460316; BDCLND=vm6Tu2BF8x8%2BwNBLh3XMBXUQD5sfKCUx; PSINO=5; H_PS_PSSID=22583_22161_1463_21100_17001_21673_22158; BDUSS=hqR2RSOVROVmNHREwtV2lJYU9xVkhBQ3pUb3ZLZlkxM3JGcVFqdmMtY3kzaDlaSVFBQUFBJCQAAAAAAAAAAAEAAAA~cQc40NLUy7XEwbm359PwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADJR-FgyUfhYM2; STOKEN=69734c07f605e8d0bb09e5513d2f8b7a4497702a32e11029617f54fa3baaa2d9; SCRC=0c9e10560d1f5de23b2cf8c42c7484ef; Hm_lvt_7a3960b6f067eb0085b7f96ff5e660b0=1492047460,1492396138,1492396201,1492667545; Hm_lpvt_7a3960b6f067eb0085b7f96ff5e660b0=1492668725; PANPSC=10049717514038179968%3AWaz2A%2F7j1vWLfEj2viX%2BHun90oj%2BY%2FIsAxoXP3kWK6VuJ5936qezF2bVph1S8bONssvn6mlYdRuXIXUCPSJ19ROAD5r1J1nbMCUL3KDnLECfYjzPb5hCCEJfIbGeUDFmg5zwpdg9WqRKWDBCT3FjnL6jsjP%2FyZiBX26YfN4HZ4D76jyG3uDkPYshZ7OchQK1KQDQpg%2B6XCV%2BSJWX9%2F9F%2FIkt7vMgzc%2BT'
-}
+
 #cookie要手动获取添加,格式如下：
 '''
 BAIDUID=C1015A10A3FC569A66923EC2D12AA6EF:FG=1; 
@@ -53,6 +49,15 @@ PANPSC=10049717514038179968%3AWaz2A%2F7j1vWLfEj2viX%2BHun90oj%2BY%2FIsAxoXP3kWK6
 
 class bdpanSpider:
 	def __init__(self):
+		self.headers = {
+			    'Host':"pan.baidu.com",
+			    'Accept':'*/*',
+			    'Accept-Language':'en-US,en;q=0.8',
+			    'Cache-Control':'max-age=0',
+			    'Referer':'https://pan.baidu.com/s/1kUOxT0V?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&',
+			    'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36',
+			    'Cookie':Cookie
+				}
 		self.p_t=re.compile(res_title)
 		self.p=re.compile(res_content)
 
@@ -65,7 +70,7 @@ class bdpanSpider:
 		获取分享页面源码
 		'''
 		try:
-			req=urllib2.Request(url,headers=headers)
+			req=urllib2.Request(url,headers=self.headers)
 			f=urllib2.urlopen(req)
 			content=f.read()
 		except Exception,e:
@@ -100,11 +105,11 @@ class bdpanSpider:
 		添加该资源到自己的网盘
 		'''
 		url_post="https://pan.baidu.com/share/transfer?shareid="+self.shareid+"&from="+self.uk+"&bdstoken="+self.bdstoken+"&channel=chunlei&clienttype=0&web=1&app_id="+self.app_id+"&logid=MTQ5MjA0ODExOTE0NTAuNjg1ODk3MTk4ODIyNDE2Mw=="
-		payload="filelist=%5B%22"+urllib.quote("/"+self.title)+"%22%5D&path=/" #资源名称与要保存的路径
+		payload="filelist=%5B%22"+urllib.quote("/"+self.title)+"%22%5D&path="+path #资源名称与要保存的路径
 		print "[Info]Url_Post:",url_post
 		print "[Info]payload:",payload
 		try:
-			req=urllib2.Request(url=url_post,data=payload,headers=headers)
+			req=urllib2.Request(url=url_post,data=payload,headers=self.headers)
 			f=urllib2.urlopen(req)
 			result=json.loads(f.read())
 			tag=result["errno"]
@@ -118,11 +123,24 @@ class bdpanSpider:
 		except Exception,e:
 			print "[Error]",str(e)
 
+@Gooey()
+def main():
+	global Cookie,path
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-shareurl",help="add your shareurl")
+	parser.add_argument("-cookie",help="add your baidupan-cookie")
+	parser.add_argument("-path",help="add your baidupan-path")
+	args=parser.parse_args()
+	if args.cookie:
+		Cookie=args.cookie
+	if args.path:
+		path=urllib.quote(args.path)
+
 
 if __name__=="__main__":
-	
-	cur=bdpanSpider()
-	cur.run("http://pan.baidu.com/s/1sl4AS93")
+	main()
+	# cur=bdpanSpider()
+	# cur.run("http://pan.baidu.com/s/1sl4AS93")
 
 	'''
 	从文件中读取百度分享链接，自动化添加到自己的网盘当中。
