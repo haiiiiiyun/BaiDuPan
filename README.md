@@ -26,6 +26,8 @@ optional arguments:
   -cookie COOKIE      add your baidupan-cookie
 ```
 
+![](/image/cmd_1.png)
+
 * -h 帮助
 * -filename 文件名称，存放百度分享链接。（可选）
 * -shareurl 单个百度分享链接。（可选）
