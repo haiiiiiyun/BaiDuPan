@@ -1,5 +1,8 @@
 # BaiDuPan 百度网盘自动添加资源项目
 
+### 说明
+本项目用于自动化添加百度分享资源到个人百度网盘，若要成功运行，需要提供个人账户cookie，百度分享链接（无密码），存在密码的百度分享链接，暂时不支持。
+
 ### Project List
 * baiduspider.py  （Shell版本）
 * baiduspider_GUI.py （GUI版本）
@@ -43,7 +46,7 @@ optional arguments:
 ![](http://thief.one/upload_image/20170412/22.png)
 ![](http://thief.one/upload_image/20170412/11.png)
 
-### Status
+### ResultStatus
 * 0  ADD SUCCESS
 * 12 ALREADY EXISTS
 * otherstatus cookie or path or shareurl have error
@@ -55,4 +58,4 @@ optional arguments:
 @By nMask
 20170413
 
-更新于20170420，增加GUI版。
+更新于20170420---增加GUI版。
