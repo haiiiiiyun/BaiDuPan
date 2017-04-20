@@ -40,11 +40,15 @@ optional arguments:
 #### baiduspider（GUI版）
 ##### 单个添加百度分享资源
 ![](/image/gui_1.png)
+
 运行程序
+
 ![](/image/gui_2.png)
 ##### 批量添加百度分享资源
 ![](/image/gui_3.png)
+
 运行程序
+
 ![](/image/gui_4.png)
 ##### 依赖
 * gooey
