@@ -30,9 +30,9 @@ headers = {
     'Cache-Control':'max-age=0',
     'Referer':'https://pan.baidu.com/s/1kUOxT0V?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&',
     'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36',
-    'Cookie':'BAIDUID=52C3FE49FD82573C4ABCEAC5E778F0F6:FG=1; BIDUPSID=52C3FE49FD82573C4ABCEAC5E778F0F6; PSTM=1481697115; PANWEB=1; Hm_lvt_7a3960b6f067eb0085b7f96ff5e660b0=1491987412,1492047499; STOKEN=45686f4bcba9169825cfe4673f01aa8eb5f800d9b43fa47d8f2528187bb7ffa0; SCRC=a1a56c8470453ae72bea427e185294d9; PANPSC=12734386039312547236%3AkR6MKMexwIvselrwnNaj%2FjY91A0xufReNHxQzJMUup3xTJ3v1z1m%2Bh53vkP0g2UgeOfVJSt3ItgoYYG0tCNFiZQDXW41cdIGgs6%2BSP%2BysvgMAXNwiGk043j7YdpwIDfJOy6S0zDqC6VtUVw2SfQVPqO2GhXGA0dK; Hm_lpvt_7a3960b6f067eb0085b7f96ff5e660b0=1492048027; BDUSS=NFWlR0UnZRbEFtV25MQUV4ZTlqcENWWG9yNWh1T3NCT3pHQ01ZSlJIU1ZaUlpaSVFBQUFBJCQAAAAAAAAAAAEAAACwYL8kdHpjMTY1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJXY7liV2O5Ycm'
+    'Cookie':''
 }
-#cookie要手动获取添加
+#cookie要手动获取添加。
 
 class bdpanSpider:
 	def __init__(self):
@@ -83,7 +83,7 @@ class bdpanSpider:
 		添加该资源到自己的网盘
 		'''
 		url_post="https://pan.baidu.com/share/transfer?shareid="+self.shareid+"&from="+self.uk+"&bdstoken="+self.bdstoken+"&channel=chunlei&clienttype=0&web=1&app_id="+self.app_id+"&logid=MTQ5MjA0ODExOTE0NTAuNjg1ODk3MTk4ODIyNDE2Mw=="
-		payload="filelist=%5B%22"+urllib.quote("/"+self.title)+"%22%5D&path=%2F"
+		payload="filelist=%5B%22"+urllib.quote("/"+self.title)+"%22%5D&path=%2F" #资源名称与要保存的路径
 		print "[Info]Url_Post:",url_post
 		print "[Info]payload:",payload
 		try:
@@ -103,10 +103,13 @@ class bdpanSpider:
 
 
 if __name__=="__main__":
-
-	cur=bdpanSpider()
-	cur.run("https://pan.baidu.com/s/1o8LkaPc")
 	
+	cur=bdpanSpider()
+	cur.run("https://pan.baidu.com/s/1o8lJVOe")
+
+	'''
+	从文件中读取百度分享链接，自动化添加到自己的网盘当中。
+	'''
 	# f=open("baidu_pan.txt","r")
 	# url_list=f.readlines()
 
