@@ -25,14 +25,12 @@ def getbaiduurl(i):
 	'''
 	urls=url+str(i)+".html"
 	try:
-		f=urllib2.urlopen(urls)
+		f=urllib2.urlopen(urls,timeout=5)
 		content=f.read()
 	except Exception,e:
 		print str(e)
 	else:
 		L=p.findall(content)
-
-		print L
 
 		if len(L)>0:
 			if len(L[0])>1:
@@ -48,8 +46,9 @@ def getbaiduurl(i):
 
 po = pool.Pool(10)
 jobs=[]
-for i in range(4000,5000):
+for i in range(2000,3000):
     jobs.append(po.spawn(getbaiduurl, i))
 gevent.joinall(jobs)
 
-f.close()
+f1.close()
+f2.close()
