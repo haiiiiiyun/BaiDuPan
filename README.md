@@ -1,7 +1,7 @@
 # BaiDuPan 百度网盘自动添加资源项目
 
 ### 说明
-本项目用于自动化添加百度分享资源到个人百度网盘，若要成功运行，需要提供个人账户cookie，百度分享链接（无密码），存在密码的百度分享链接，暂时不支持。
+本项目用于自动化添加百度分享资源到个人百度网盘，若要成功运行，需要提供个人账户cookie，百度分享链接（无密码），存在密码的百度分享链接，暂时不支持。目前项目分为Shell版与GUI版本，GUI目前仅限windows下运行，Shell版任何平台都可以。
 
 ### Project List
 * baiduspider.py  （Shell版本）
@@ -9,6 +9,9 @@
 * paidupan.txt  （百度网盘分享链接地址文件）
 
 ### Usage
+```bash
+git clone https://github.com/tengzhangchao/BaiDuPan
+```
 #### baiduspider（Shell版）
 ```bash
 python baiduspider.py --help
@@ -43,21 +46,26 @@ optional arguments:
 ![](/image/gui_3.png)
 运行程序
 ![](/image/gui_4.png)
+##### 依赖
+* gooey
+
+```bash
+pip install gooey
+```
 
 ### screenshot
-![](http://thief.one/upload_image/20170412/22.png)
 ![](http://thief.one/upload_image/20170412/11.png)
 
 ### ResultStatus
-* 0  ADD SUCCESS
-* 12 ALREADY EXISTS
-* otherstatus cookie or path or shareurl have error
+* 0  （ADD SUCCESS）
+* 12 （ALREADY EXISTS）
+* otherstatus （cookie or path or shareurl have error）
 
 
 详情请参考：[色情资源引发的百度网盘之战|nMask'Blog](http://thief.one/2017/04/12/2/)
 
 
 @By nMask
-20170413
+2017.04.13
 
-更新于20170420---增加GUI版。
+更新于2017.04.20---增加GUI版。
