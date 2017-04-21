@@ -89,6 +89,8 @@ class bdpanSpider:
 				self.bdstoken=L[0][3]
 				self.shareid=L[0][4]
 
+		print "[Info]Name:",self.path
+
 
 	def addziyuan(self):
 		'''
@@ -96,14 +98,14 @@ class bdpanSpider:
 		'''
 		url_post="https://pan.baidu.com/share/transfer?shareid="+self.shareid+"&from="+self.uk+"&bdstoken="+self.bdstoken+"&channel=chunlei&clienttype=0&web=1&app_id="+self.app_id+"&logid=MTQ5MjA0ODExOTE0NTAuNjg1ODk3MTk4ODIyNDE2Mw=="
 		payload="filelist=%5B%22"+self.path+"%22%5D&path=/" #资源名称与要保存的路径
-		print "[Info]Url_Post:",url_post
-		print "[Info]payload:",payload
+		# print "[Info]Url_Post:",url_post
+		# print "[Info]payload:",payload
 		try:
 			req=urllib2.Request(url=url_post,data=payload,headers=self.headers)
 			f=urllib2.urlopen(req)
 			result=json.loads(f.read())
 			tag=result["errno"]
-			print tag
+			# print tag
 			if tag==0:
 				print "[Result]Add Success"
 			elif tag==12:
