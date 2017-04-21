@@ -65,6 +65,8 @@ pip install gooey
 * 12 （ALREADY EXISTS）
 * otherstatus （cookie or path or shareurl have error）
 
+有问题可以在Issues中留言。
+
 
 详情请参考：[色情资源引发的百度网盘之战|nMask'Blog](http://thief.one/2017/04/12/2/)
 
