@@ -116,7 +116,7 @@ class bdpanSpider:
 			print "[Error]",str(e)
 
 
-@Gooey(program_name="Automatically add resources to Baidu SkyDrive By nMask http://thief.one")
+@Gooey(program_name="Automatically add resources to Baidu SkyDrive By nMask http://thief.one", language='chinese')
 def main():
 	global Cookie,path,shareurl,filename
 	parser = GooeyParser()
