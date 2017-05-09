@@ -79,4 +79,5 @@ pip install wxpython
 @By nMask
 2017.04.13
 
-更新于2017.04.20---增加GUI版。
+更新于2017.04.20---增加GUI版
+更新于2017.05.09---修改GUI为中文版   By  cxgreat2014
