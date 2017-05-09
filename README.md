@@ -52,9 +52,14 @@ optional arguments:
 ![](/image/gui_4.png)
 ##### 依赖
 * gooey
+* wxpython
 
 ```bash
 pip install gooey
+```
+wxpython请从官网编译安装，或者使用
+```bash
+pip install wxpython
 ```
 
 ### screenshot
